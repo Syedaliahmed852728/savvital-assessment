@@ -13,13 +13,13 @@ uv sync               # installs all dependencies from pyproject.toml
 
 ### Task 1 — AI Intake Triage
 
-1. Copy `.env.example` to `.env` and paste your Groq API key:
+1. create`.env` in the root directory and paste your Groq API key:
    ```
    GROQ_API_KEY=your_key_here
    ```
    Or switch to local Ollama by setting `PROVIDER = "ollama"` in `task1_intake_triage/config.py`.
 
-2. Run the triage:
+2. Run the triage from the root directory:
    ```bash
    uv run python -m task1_intake_triage.intake_triage
    ```
