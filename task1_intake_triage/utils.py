@@ -1,4 +1,8 @@
 import json
+from langchain_groq import ChatGroq
+from typing import List, Literal
+from pydantic import BaseModel, Field
+
 from .config import (
     GROQ_API_KEY,
     GROQ_MODEL,
@@ -9,6 +13,25 @@ from .config import (
     TIMEOUT,
     MAX_RETRIES,
 )
+
+
+# for used by LLM response parsing and output schema validation
+# that's the inbuild functionality of langchain structured ouput.
+Instrument = Literal[
+    "Will", "Living Trust", "Power of Attorney", "Healthcare Directive"
+]
+
+
+class EstatePlanningRecommendation(BaseModel):
+    client_name: str = Field(description="Full name of the client")
+
+    recommended_instruments: List[Instrument] = Field(
+        description="List of allowed estate planning instruments"
+    )
+
+    rationale: str = Field(description="1 to 3 sentences explaining the recommendation")
+
+    urgency_flag: Literal["High", "Medium", "Low"] = Field(description="Urgency level")
 
 
 # loading clients data from clients.json
