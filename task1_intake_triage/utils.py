@@ -2,8 +2,10 @@ import json
 from langchain_groq import ChatGroq
 from typing import List, Literal
 from pydantic import BaseModel, Field
+from langchain_ollama import ChatOllama
 
 from .config import (
+    PROVIDER,
     GROQ_API_KEY,
     GROQ_MODEL,
     OLLAMA_BASE_URL,
@@ -163,3 +165,50 @@ def call_ollama(prompt: str) -> str:
     structured_model = model.with_structured_output(EstatePlanningRecommendation)
 
     return structured_model.invoke(messages)
+
+
+def call_llm(prompt: str) -> str:
+    """Routes to the correct provider based on config.py PROVIDER setting."""
+    if PROVIDER == "groq":
+        return call_groq(prompt)
+    elif PROVIDER == "ollama":
+        return call_ollama(prompt)
+    else:
+        raise ValueError(
+            f"Unknown provider '{PROVIDER}'. "
+            "Set PROVIDER to 'groq' or 'ollama' in config.py"
+        )
+
+
+def call_llm_with_retry(prompt: str) -> EstatePlanningRecommendation:
+    """Retry LLM call with validation feedback until MAX_RETRIES."""
+
+    last_error = None
+    augmented_prompt = prompt
+
+    for attempt in range(1, MAX_RETRIES + 1):
+        try:
+            result = call_llm(augmented_prompt)
+            return result  # already validated via structured output
+
+        except Exception as e:
+            last_error = str(e)
+
+            # Extract useful error signal (don’t dump raw garbage)
+            error_feedback = f"""
+            The previous response was invalid due to schema violation.
+
+            Error:
+            {last_error}
+
+            Fix the response:
+            - Only use allowed instruments: Will, Living Trust, Power of Attorney, Healthcare Directive
+            - Do NOT include any other instruments
+            - Return valid JSON only
+            """
+
+            augmented_prompt = prompt + "\n\n" + error_feedback
+
+            print(f"Retry {attempt}/{MAX_RETRIES} due to validation error...")
+
+    raise RuntimeError(f"Failed after {MAX_RETRIES} retries. Last error: {last_error}")

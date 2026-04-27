@@ -1,4 +1,4 @@
-from .utils import load_client_profiles, build_prompt, call_groq
+from .utils import load_client_profiles, build_prompt, call_llm_with_retry
 from .config import CLIENTS_FILE
 
 try:
@@ -14,7 +14,7 @@ for i, client in enumerate(client_profiles, 1):
     prompt = build_prompt(client)
 
     try:
-        result = call_groq(prompt)
+        result = call_llm_with_retry(prompt)
         print(result)
     except Exception as e:
         print(f"LLM call failed: {e}")
