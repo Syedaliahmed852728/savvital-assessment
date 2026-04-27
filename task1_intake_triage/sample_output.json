@@ -1,0 +1,32 @@
+[
+  {
+    "client_name": "Sarah Ahmed",
+    "recommended_instruments": [
+      "Will",
+      "Healthcare Directive"
+    ],
+    "rationale": "As a single, young individual with no assets or dependents, a Will and Healthcare Directive are essential for ensuring her wishes are respected in the event of her passing or incapacitation.",
+    "urgency_flag": "Low"
+  },
+  {
+    "client_name": "James Wilson",
+    "recommended_instruments": [
+      "Living Trust",
+      "Will",
+      "Power of Attorney",
+      "Healthcare Directive"
+    ],
+    "rationale": "As a 58-year-old married business owner with children and property, it is essential to have a comprehensive estate plan in place to ensure the smooth transfer of assets, business continuity, and medical wishes are respected.",
+    "urgency_flag": "High"
+  },
+  {
+    "client_name": "Maria Chen",
+    "recommended_instruments": [
+      "Will",
+      "Power of Attorney",
+      "Healthcare Directive"
+    ],
+    "rationale": "As a divorced parent with children, Maria needs to ensure her children are well taken care of in the event of her passing. A Will and Power of Attorney will help her maintain control and make decisions for her children. A Healthcare Directive will also ensure her medical wishes are respected.",
+    "urgency_flag": "Medium"
+  }
+]

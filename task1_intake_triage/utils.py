@@ -3,6 +3,7 @@ from langchain_groq import ChatGroq
 from typing import List, Literal
 from pydantic import BaseModel, Field
 from langchain_ollama import ChatOllama
+from docx import Document
 
 from .config import (
     PROVIDER,
@@ -212,3 +213,25 @@ def call_llm_with_retry(prompt: str) -> EstatePlanningRecommendation:
             print(f"Retry {attempt}/{MAX_RETRIES} due to validation error...")
 
     raise RuntimeError(f"Failed after {MAX_RETRIES} retries. Last error: {last_error}")
+
+
+# generating docx evidence log for better readability and presentation of LLM interactions
+def generate_docx(evidence_log: list, output_path: str):
+    doc = Document()
+    doc.add_heading("AI Estate Planning Intake Triage - Evidence Log", 0)
+
+    for entry in evidence_log:
+        doc.add_heading(f"Profile {entry.get('profile_number')}", level=1)
+
+        doc.add_paragraph("Input Data:")
+        doc.add_paragraph(json.dumps(entry.get("input_data", {}), indent=2))
+
+        doc.add_paragraph("Prompt Sent:")
+        doc.add_paragraph(entry.get("prompt_sent", ""))
+
+        doc.add_paragraph("LLM Output:")
+        doc.add_paragraph(json.dumps(entry.get("llm_output", {}), indent=2))
+
+        doc.add_page_break()
+
+    doc.save(output_path)
