@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Sarah Ahmed",
+        "age": 34,
+        "marital_status": "Single",
+        "has_children": false,
+        "owns_property": false,
+        "has_business": false
+    },
+    {
+        "name": "James Wilson",
+        "age": 58,
+        "marital_status": "Married",
+        "has_children": true,
+        "owns_property": true,
+        "has_business": true
+    },
+    {
+        "name": "Maria Chen",
+        "age": 45,
+        "marital_status": "Divorced",
+        "has_children": true,
+        "owns_property": true,
+        "has_business": false
+    }
+]
