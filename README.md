@@ -12,6 +12,9 @@ uv sync               # installs all dependencies from pyproject.toml
 ---
 
 ### Task 1 — AI Intake Triage
+reference_links:- 
+- https://docs.langchain.com/oss/python/integrations/chat/groq
+- https://reference.langchain.com/python/langchain-groq/chat_models/ChatGroq/with_structured_output
 
 1. create`.env` in the root directory and paste your Groq API key:
    ```
