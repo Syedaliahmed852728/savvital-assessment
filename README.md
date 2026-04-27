@@ -64,3 +64,11 @@ else:
 High-urgency cases get written to a `pending_review.json` (or a database table with `status = 'pending'`). A reviewer reads that file, approves or edits, and a second script promotes approved records into the final output. Low and Medium cases pass through automatically. This keeps the human in the loop only where the stakes are highest, without blocking the whole pipeline.
 
 ---
+
+## Task 2 — KPI Dashboard Screenshots
+
+![Pipeline Volume by Stage](task2_kpi_dashboard/screenshots/screenshot_1_pipeline_volume.png)
+![Monthly Win Rate](task2_kpi_dashboard/screenshots/screenshot_2_win_rate.png)
+![Average Days to Close](task2_kpi_dashboard/screenshots/screenshot_3_avg_days.png)
+![Monthly Revenue Trend](task2_kpi_dashboard/screenshots/screenshot_4_revenue_trend.png)
+![Revenue by Product](task2_kpi_dashboard/screenshots/screenshot_5_product_revenue.png)
